@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    {% if page.title %}
+    <title>{{ page.title }}</title>
+    {% else %}
+    <title>bugswriter's diary</title>
+    {% endif %}
+    <meta name="description" content="<your site description goes here>">
+    <meta name="author" content="<your name>">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/diary.css">
+    <link rel="icon" type="image/png" href="/favicon.ico">
+  </head>
+  <body>
+    <header>
+      <h2>{{ section.title }}</h2>
+      <hr/>
+      <figure>
+	<img alt="lain using computers" src="https://media.tenor.com/mjWYgxi6RS8AAAAC/lain-typing.gif" width="500px" />
+      <figcaption>~ serial experiments lain</figcaption>
+            </figure>
+    </header>
+    <p>
+	  <code>Please edit ./templates/diary.html</code><br>
+      Hi, I am {your name}. I was born in <b>{DOB}</b>.<br>
+      Today's date - <b>{current date}</b>.<br>
+	  { write your rant }
+    <hr/>    
+	<h3>format of your header in md file in content dir.</h3>
+	<pre>
+	+++
+	title = "2023.01.01 Monday pm 23:12"
+	+++
+	</pre>
+
+    <div class="posts">
+      {% for page in paginator.pages  %}
+      <article class="post" id="{{ page.title }}">
+	<h4><a href="#{{ page.title }}"> # </a> {{ page.title }}</h4>
+	<div class="post__summary">
+	  {{ page.content | safe }}
+	</div>
+      </article>
+      {% endfor %}
+    </div>
+    <nav class="pagination">
+      {% if paginator.previous %}
+      <a class="previous" href="{{ paginator.previous }}">‹ Prev</a>
+      {% endif %}
+      {% if paginator.next %}
+      <a class="next" href="{{ paginator.next }}">Next ›</a>
+      {% endif %}
+    </nav>
+  </body>
+</html>
